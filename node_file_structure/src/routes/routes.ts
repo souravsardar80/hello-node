@@ -1,4 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
+import { productController } from "../controller/product.controller";
+import { userController } from "../controller/user.controller";
 
 export const routeHandler = (req: IncomingMessage, res: ServerResponse) => {
      // console.log(req.url); // '/', '/user', '/products'
@@ -14,18 +16,18 @@ export const routeHandler = (req: IncomingMessage, res: ServerResponse) => {
          res.writeHead(200,{"content-type" : "application/json"});
         res.end(JSON.stringify({message:"This is root route"}));
     }else if(url?.startsWith('/products')){
-        res.writeHead(200,{"content-type" : "application/json"});
-        res.end(JSON.stringify({message:"This is products route"}));
+        productController(req,res);
     }else if(url?.startsWith('/user')) {
-        res.writeHead(200,{"content-type": "application/json"});
-        res.end(JSON.stringify({"username":"Jack Sparrow"}));
+        userController(req,res);
 
     }else {
         //  res.writeHead(404,{"content-type" : "text/plain"});
         // res.end("route not found");
 
         res.writeHead(404,{"content-type" : "application/json"});
-        res.end(JSON.stringify({message: "route not found"}));
+        res.end(JSON.stringify({message: "route not found"
+        }));
+        
         
     }
 }

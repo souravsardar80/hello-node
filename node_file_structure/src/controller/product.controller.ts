@@ -1,0 +1,20 @@
+import type { IncomingMessage, ServerResponse } from "node:http";
+
+export const productController = (req: IncomingMessage, res: ServerResponse)=>{
+    const url = req.url;
+    const method = req.method;
+    const products = [
+        {
+            id: 1,
+            name:   "Product1"
+        }
+    ]
+
+    if(url === "/products" && method === "GET"){
+          res.writeHead(200,{"content-type" : "application/json"});
+        res.end(JSON.stringify({message:"This is products route",
+         data: products   
+        }));
+    }
+  
+}
