@@ -1,0 +1,11 @@
+
+
+
+
+
+post http://localhost:5000/products
+Content-Type: application/json
+
+{
+    "name" : "product test"
+}
