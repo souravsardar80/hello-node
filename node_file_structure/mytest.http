@@ -3,6 +3,10 @@
 
 get http://localhost:5000/products/2
 
+### get all
+get http://localhost:5000/products
+
+
 post http://localhost:5000/products
 Content-Type: application/json
 

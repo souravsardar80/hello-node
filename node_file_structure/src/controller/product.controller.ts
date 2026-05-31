@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { insertProduct, readProduct } from "../service/productService";
 import type { IProduct } from "../types/product.type";
 import { parseBody } from "../utility/parseBody";
+import { sendResponse } from "../utility/sendResponse";
 
 export const productController = async (
   req: IncomingMessage,
@@ -30,10 +31,17 @@ export const productController = async (
   const products: IProduct = readProduct();
 
   if (url === "/products" && method === "GET") {
-    res.writeHead(200, { "content-type": "application/json" });
-    res.end(
-      JSON.stringify({ message: "This is products route", data: products }),
-    );
+    try {
+      return sendResponse(
+        res,
+        200,
+        true,
+        "Product retrived successfully!",
+        products,
+      );
+    } catch (error) {
+      return sendResponse(res, 500, false, "Something went wrong", error);
+    }
   } else if (method === "GET" && id !== null) {
     const product = products.find((p: IProduct) => p.id === id);
     // console.log(product);
