@@ -1,11 +1,31 @@
 
 
 
-
+get http://localhost:5000/products/2
 
 post http://localhost:5000/products
 Content-Type: application/json
 
 {
-    "name" : "product test"
+    "name" : "product test",
+    "description": "product description",
+    "price" : 85000
 }
+
+
+### put method
+put http://localhost:5000/products/1780043037126
+Content-Type: application/json
+
+{
+    "name" : "product test using put",
+    "description": "product description",
+    "price" : 8000
+}
+
+### delete
+delete http://localhost:5000/products/3
+
+
+### delete 
+delete http://localhost:5000/products/2
